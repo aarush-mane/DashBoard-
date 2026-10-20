@@ -1,0 +1,290 @@
+/* ==========================================================================
+   PROJECT CARDS & PROJECT DETAILS WORKSPACE STYLES
+   ========================================================================== */
+
+/* Project Overview Grid on Dashboard */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+  margin-bottom: 32px;
+}
+
+.project-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-flat);
+  border: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-flat-hover);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.project-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.project-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider);
+  margin-top: 16px;
+}
+
+.project-due-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.project-tasks-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   PROJECT DETAILS PAGE (DEEP-DIVE WORKSPACE)
+   ========================================================================== */
+.project-detail-hero {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  box-shadow: var(--shadow-flat);
+  border: 1px solid var(--border-card);
+  margin-bottom: 28px;
+}
+
+.project-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.project-breadcrumb a {
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.project-breadcrumb a:hover {
+  color: var(--primary);
+}
+
+.project-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.project-detail-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-inset);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+}
+
+.meta-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-box-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-box-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Project Detail Tab Navigation */
+.project-tabs-bar {
+  display: flex;
+  border-bottom: 1px solid var(--divider);
+  gap: 12px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.project-tab-btn {
+  padding: 12px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 3px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.project-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.project-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.project-tab-pane {
+  display: none;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.project-tab-pane.active {
+  display: block;
+}
+
+/* Timeline / Milestones Gantt Style */
+.milestones-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.milestone-item {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-flat-sm);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all var(--transition-fast);
+}
+
+.milestone-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-flat-hover);
+}
+
+.milestone-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.milestone-status-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-inset-sm);
+  flex-shrink: 0;
+}
+
+.milestone-status-icon.completed { color: var(--success); }
+.milestone-status-icon.current { color: var(--primary); }
+.milestone-status-icon.upcoming { color: var(--text-muted); }
+
+/* Discussion Thread */
+.discussion-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.discussion-post {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-flat-sm);
+  border: 1px solid var(--border-card);
+}
+
+.discussion-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.discussion-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.discussion-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.discussion-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}

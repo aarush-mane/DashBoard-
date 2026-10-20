@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulseFlow — Modern Team Project Management Dashboard</title>
+  <meta name="description" content="A modern, tactile, neumorphic SaaS project management dashboard designed for student startups, software engineers, and agile product teams." />
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Neumorphic SaaS Stylesheets -->
+  <link rel="stylesheet" href="css/neumorphic.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/kanban.css" />
+  <link rel="stylesheet" href="css/project-detail.css" />
+  <link rel="stylesheet" href="css/calendar.css" />
+  <link rel="stylesheet" href="css/messages.css" />
+  <link rel="stylesheet" href="css/files.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+</head>
+<body>
+  <!-- App Shell -->
+  <div id="app">
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Collapsible Sidebar -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Navigation Bar -->
+      <header class="topbar" id="topbar"></header>
+
+      <!-- Main Content Views -->
+      <main class="main-content">
+        <!-- 1. DASHBOARD OVERVIEW VIEW -->
+        <section id="view-dashboard" class="view-container active">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>
+                <span>Workspace Overview</span>
+              </h1>
+              <div class="page-subtitle">Welcome back, Aarush! Here is the latest progress across your active ventures.</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-default" onclick="window.modals.openCreateProjectModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                New Project
+              </button>
+              <button class="btn btn-primary" onclick="window.modals.openCreateTaskModal('todo')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Create Task
+              </button>
+            </div>
+          </div>
+
+          <!-- Section 3: Stat Cards Overview -->
+          <div id="dashboardStatsMount" class="stats-grid"></div>
+
+          <!-- Section 4: Project Overview Cards -->
+          <div style="margin-bottom: 32px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <div>
+                <h2>Active Projects</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Click any project to enter its dedicated collaborative workspace</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" onclick="window.appRouter.navigate('projects')">View All Projects →</button>
+            </div>
+            <div id="dashboardProjectsMount"></div>
+          </div>
+
+          <!-- Section 5: Task Management Kanban Preview -->
+          <div style="margin-bottom: 32px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <div>
+                <h2>Sprint Task Board</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Drag and drop task cards to shift stages in real-time</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" onclick="window.appRouter.navigate('tasks')">Full Task Center →</button>
+            </div>
+            <div id="dashboardKanbanMount"></div>
+          </div>
+
+          <!-- Split Row: Analytics & Recent Activity -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-bottom: 32px;">
+            <!-- Analytics Summary -->
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h2>Sprint Analytics</h2>
+                <button class="btn btn-ghost btn-sm" onclick="window.appRouter.navigate('reports')">Full Reports →</button>
+              </div>
+              <div id="dashboardChartsMount"></div>
+            </div>
+
+            <!-- Recent Activity Timeline -->
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h2>Recent Activity</h2>
+                <button class="btn btn-ghost btn-sm" onclick="window.appRouter.navigate('activity')">All Logs →</button>
+              </div>
+              <div id="dashboardActivityMount"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. MY TASKS FULL VIEW -->
+        <section id="view-tasks" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>My Tasks & Kanban</h1>
+              <div class="page-subtitle">Interactive sprint backlog, Kanban boards, and priority filters</div>
+            </div>
+          </div>
+          <div id="myTasksViewMount"></div>
+        </section>
+
+        <!-- 3. PROJECTS GALLERY VIEW -->
+        <section id="view-projects" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>All Projects</h1>
+              <div class="page-subtitle">Manage campus ventures, AI tools, web architectures, and mobile apps</div>
+            </div>
+            <button class="btn btn-primary" onclick="window.modals.openCreateProjectModal()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Create Project
+            </button>
+          </div>
+          <div id="projectsGalleryMount"></div>
+        </section>
+
+        <!-- 4. TEAM VIEW -->
+        <section id="view-team" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Team Members</h1>
+              <div class="page-subtitle">Track workloads, roles, active sprints, and online availability</div>
+            </div>
+            <button class="btn btn-primary" onclick="window.modals.openInviteMemberModal()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              Invite Member
+            </button>
+          </div>
+          <div id="teamViewMount"></div>
+        </section>
+
+        <!-- 5. CALENDAR VIEW -->
+        <section id="view-calendar" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Calendar & Deadlines</h1>
+              <div class="page-subtitle">Interactive schedule for milestones, meetings, and delivery deadlines</div>
+            </div>
+          </div>
+          <div id="calendarViewMount"></div>
+        </section>
+
+        <!-- 6. FILES & DOCUMENTS VIEW -->
+        <section id="view-files" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Project Files & Documents</h1>
+              <div class="page-subtitle">Centralized asset library, code schemas, Figma tokens, and pitch decks</div>
+            </div>
+          </div>
+          <div id="filesViewMount"></div>
+        </section>
+
+        <!-- 7. MESSAGES VIEW -->
+        <section id="view-messages" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Team Communication</h1>
+              <div class="page-subtitle">Fast channels, direct messages, and @ mentions</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="window.modals.openMessageTeamModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Message to Team
+              </button>
+            </div>
+          </div>
+          <div id="messagesViewMount"></div>
+        </section>
+
+        <!-- 8. RECENT ACTIVITY VIEW -->
+        <section id="view-activity" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Activity Audit Log</h1>
+              <div class="page-subtitle">Comprehensive team change history and release activity</div>
+            </div>
+          </div>
+          <div id="activityViewMount"></div>
+        </section>
+
+        <!-- 9. REPORTS VIEW -->
+        <section id="view-reports" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Analytics & Velocity Reports</h1>
+              <div class="page-subtitle">Performance KPIs, sprint completion velocity, and workload metrics</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-default" onclick="window.modals.downloadTasksCSV()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export Tasks CSV
+              </button>
+              <button class="btn btn-primary" onclick="window.modals.openDownloadReportsModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download Reports
+              </button>
+            </div>
+          </div>
+          <div id="reportsViewMount"></div>
+        </section>
+
+        <!-- 10. SETTINGS VIEW -->
+        <section id="view-settings" class="view-container">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Settings & Preferences</h1>
+              <div class="page-subtitle">Personal profile, tactile theme controls, and notification digests</div>
+            </div>
+          </div>
+          <div id="settingsViewMount"></div>
+        </section>
+
+        <!-- 11. PROJECT DETAIL VIEW -->
+        <section id="view-project-detail" class="view-container">
+          <!-- Rendered dynamically by projectDetail.js -->
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules in Dependency Order -->
+  <script src="js/store.js"></script>
+  <script src="js/components/modals.js"></script>
+  <script src="js/components/sidebar.js"></script>
+  <script src="js/components/topbar.js"></script>
+  <script src="js/components/kanban.js"></script>
+  <script src="js/components/charts.js"></script>
+  <script src="js/components/calendar.js"></script>
+  <script src="js/components/messages.js"></script>
+  <script src="js/components/files.js"></script>
+  <script src="js/components/projectDetail.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

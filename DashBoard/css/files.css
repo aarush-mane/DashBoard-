@@ -1,0 +1,120 @@
+/* ==========================================================================
+   FILES & DOCUMENTS STYLES
+   Grid/List View, File Cards, Upload Zone, Preview
+   ========================================================================== */
+
+.files-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.file-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-flat-sm);
+  border: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.file-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-flat-hover);
+}
+
+.file-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-inset-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+}
+
+.file-icon-box.pdf { color: #ef4444; }
+.file-icon-box.figma { color: #8b5cf6; }
+.file-icon-box.code { color: #3b82f6; }
+.file-icon-box.image { color: #10b981; }
+.file-icon-box.zip { color: #f59e0b; }
+.file-icon-box.doc { color: #0284c7; }
+
+.file-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.file-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--divider);
+}
+
+.file-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+/* File Table (List View) */
+.file-table-wrap {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-flat);
+  border: 1px solid var(--border-card);
+  overflow-x: auto;
+}
+
+.file-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.file-table th {
+  padding: 14px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--divider);
+}
+
+.file-table td {
+  padding: 14px 20px;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--divider);
+  vertical-align: middle;
+}
+
+.file-table tr:hover td {
+  background: var(--bg-surface-alt);
+}

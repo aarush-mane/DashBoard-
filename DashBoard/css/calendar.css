@@ -1,0 +1,192 @@
+/* ==========================================================================
+   INTERACTIVE CALENDAR STYLES
+   Month & Week Views, Deadlines, Milestones, Meetings
+   ========================================================================== */
+
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 16px 22px;
+  box-shadow: var(--shadow-flat);
+  border: 1px solid var(--border-card);
+}
+
+.calendar-month-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.calendar-current-month {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  min-width: 170px;
+  text-align: center;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot.deadline { background: var(--danger); }
+.legend-dot.milestone { background: var(--purple); }
+.legend-dot.meeting { background: var(--info); }
+.legend-dot.event { background: var(--success); }
+
+/* Calendar Grid */
+.calendar-grid {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-flat);
+  border: 1px solid var(--border-card);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 8px 0;
+  letter-spacing: 0.05em;
+}
+
+.calendar-cell {
+  min-height: 105px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-flat-sm);
+  border: 1px solid var(--border-card);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.calendar-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-flat-hover);
+  border-color: var(--primary);
+}
+
+.calendar-cell.other-month {
+  opacity: 0.35;
+  box-shadow: none;
+  background: transparent;
+}
+
+.calendar-cell.is-today {
+  box-shadow: var(--shadow-inset);
+  border-color: var(--primary);
+}
+
+.calendar-cell.is-selected {
+  outline: 2px solid var(--primary);
+  background: var(--bg-surface-alt);
+}
+
+.cell-date-num {
+  font-size: 0.82rem;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+
+.calendar-cell.is-today .cell-date-num {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.cell-events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.calendar-event-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: var(--shadow-flat-sm);
+}
+
+.calendar-event-pill.deadline {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+  border-left: 3px solid var(--danger);
+}
+
+.calendar-event-pill.milestone {
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--purple);
+  border-left: 3px solid var(--purple);
+}
+
+.calendar-event-pill.meeting {
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--secondary);
+  border-left: 3px solid var(--secondary);
+}
+
+.calendar-event-pill.event {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+  border-left: 3px solid var(--success);
+}
+
+@media (max-width: 768px) {
+  .calendar-cell {
+    min-height: 70px;
+    padding: 4px;
+  }
+  .calendar-event-pill {
+    font-size: 0.62rem;
+    padding: 1px 3px;
+  }
+}
